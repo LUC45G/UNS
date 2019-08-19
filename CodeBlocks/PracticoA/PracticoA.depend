@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1565982806 source:c:\users\cornflower\downloads\orga\codeblocks\practicoa\main.c
+	<stdio.h>
+	<stdlib.h>
+
