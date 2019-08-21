@@ -1,14 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
+int potencia(int a, int b);
+int convertirADecimal(char c);
+int contarDigitos(int n);
 
 int main() {
-    return punto9();
+    punto10();
+    return 0;
 }
 
 int punto1() {
     int sumaPares = 0; int cantPares = 0;
     int multipImpares = 1; int cantImpares = 0;
-    int finish = 0; int i = 1;
+    int i = 1;
 
     while(cantImpares < 10 || cantPares < 10) {
 
@@ -73,10 +77,9 @@ int punto4() {
         default:
             printf("%d No es una operacion valida.", option );
             break;
-
-
     }
 
+    return 0;
 }
 
 int punto5() {
@@ -174,20 +177,36 @@ int potencia(int a, int b) {
 int punto9() {
 
     // TODO: Verificar que la cadena sea exclusivamente hexadecimal;
-    char input[100], aux[100];
-    int output = 0, condition = 1, i = 0;
+    char input[10], aux[100];
+
+    for( int j = 0; j < 10; j++ ) {
+        input[j] = 'X';
+    }
+
+    int output = 0, condition = 1, auxCondition = 1, i = 0, length = 0;
 
     char caux;
 
+
     printf("Ingrese una cadena de digitos hexadecimales: \n");
-    fgets(input, sizeof(input), stdin);
+    scanf("%s", input);
+
+    for( int k = 0; auxCondition || k < 10; k++ ) {
+        length++;
+        auxCondition =  input[k] != '\0' || input[k] == '\n';
+    }
+
+    printf(" length: %d\n", length);
 
     while(condition) {
-        caux = input[i++];
+        caux = input[i];
 
-        output += ( convertirADecimal(caux) * potencia( 16, i));
+        if( input[i] != ' ' )
+            output += ( convertirADecimal(caux) * potencia( 16, length));
 
-        condition = input[i] == nullptr; // Que es NULL en C?
+        i++;
+        length--;
+        condition = input[i] != '\0' || input[i] == '\n';
     }
 
     printf("El valor en decimal es: %d", output);
@@ -220,8 +239,34 @@ int convertirADecimal(char c) { // Arreglar el casteo
             break;
         default:
             r = (int)  c;
+            r = r - 48;
             break;
     }
 
     return r;
+}
+
+int punto10() {
+
+    int input, digits = 0;
+
+    printf("Ingrese un numero entero: \n");
+    scanf("%i", &input);
+
+    digits = contarDigitos(input);
+
+    printf("\nCantidad de digitos: %i", digits);
+
+    return 0;
+}
+
+int contarDigitos(int n) {
+    if ( n == 0 ) {
+            printf("%i\n", n);
+        return 0;
+    }
+    else {
+        printf("%i\n", n);
+        return contarDigitos(n/10) + 1;
+    }
 }
