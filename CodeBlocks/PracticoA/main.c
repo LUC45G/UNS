@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 int main() {
-    return punto7();
+    return punto9();
 }
 
 int punto1() {
@@ -140,4 +140,88 @@ int punto7() {
     printf("El mayor numero de la serie es: %ld. \nEl menor numero de la serie es: %ld. \nEl promedio de la serie es %ld.", mayor, menor, promedio);
 
     return 0;
+}
+
+int punto8() {
+    int inputValue, outputValue = 0, i = 0, aux;
+
+    printf("Ingrese un numero en notacion binaria: \n");
+    scanf("%d", &inputValue);
+
+    while ( inputValue > 0 ) {
+
+        aux = inputValue % 10;
+        outputValue += ( aux * potencia(2, i) );
+
+        i++;
+        inputValue /= 10;
+    }
+
+    printf("Su equivalente decimal es %d", outputValue);
+
+    return 0;
+}
+
+int potencia(int a, int b) {
+    int aux = 1;
+
+    for ( int i = 0; i < b; i++)
+        aux *= a;
+
+    return aux;
+}
+
+int punto9() {
+
+    // TODO: Verificar que la cadena sea exclusivamente hexadecimal;
+    char input[100], aux[100];
+    int output = 0, condition = 1, i = 0;
+
+    char caux;
+
+    printf("Ingrese una cadena de digitos hexadecimales: \n");
+    fgets(input, sizeof(input), stdin);
+
+    while(condition) {
+        caux = input[i++];
+
+        output += ( convertirADecimal(caux) * potencia( 16, i));
+
+        condition = input[i] == nullptr; // Que es NULL en C?
+    }
+
+    printf("El valor en decimal es: %d", output);
+
+
+    return 0;
+}
+
+int convertirADecimal(char c) { // Arreglar el casteo
+    int r;
+
+    switch(c) {
+        case 'A':
+            r = 10;
+            break;
+        case 'B':
+            r = 11;
+            break;
+        case 'C':
+            r = 12;
+            break;
+        case 'D':
+            r = 13;
+            break;
+        case 'E':
+            r = 14;
+            break;
+        case 'F':
+            r = 15;
+            break;
+        default:
+            r = (int)  c;
+            break;
+    }
+
+    return r;
 }
