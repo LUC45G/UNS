@@ -5,7 +5,7 @@ int convertirADecimal(char c);
 int contarDigitos(int n);
 
 int main() {
-    punto10();
+    punto11();
     return 0;
 }
 
@@ -215,7 +215,7 @@ int punto9() {
     return 0;
 }
 
-int convertirADecimal(char c) { // Arreglar el casteo
+int convertirADecimal(char c) {
     int r;
 
     switch(c) {
@@ -253,6 +253,7 @@ int punto10() {
     printf("Ingrese un numero entero: \n");
     scanf("%i", &input);
 
+    printf("\nDigito ingresado: %d - Ubicacion en memoria: %d", input, &input);
     digits = contarDigitos(input);
 
     printf("\nCantidad de digitos: %i", digits);
@@ -262,11 +263,46 @@ int punto10() {
 
 int contarDigitos(int n) {
     if ( n == 0 ) {
-            printf("%i\n", n);
+            printf("\n%i", n);
         return 0;
     }
     else {
-        printf("%i\n", n);
+        printf("\n%i", n);
         return contarDigitos(n/10) + 1;
+    }
+}
+
+int punto11() {
+    int input;
+
+    printf("Ingrese un numero entero: ");
+    scanf("%d", &input);
+    printf("\n");
+
+    if ( esProlijoAsc(input) || esProlijoDesc(input) ) {
+        printf("Es un numero prolijo :D");
+    }
+    else {
+        printf("No es un numero prolijo >:(");
+    }
+}
+
+int esProlijoAsc(int n) {
+
+    if ( n%10 == 0 ) {
+        return 1;
+    }
+    else {
+        return ( (n%10) > ( (n/10)%10 ) ) && esProlijoAsc(n/10);
+    }
+}
+
+int esProlijoDesc(int n) {
+
+    if ( n/10 == 0 ) {
+        return 1;
+    }
+    else {
+        return ( (n%10) < ( (n/10)%10 ) ) && esProlijoDesc(n/10);
     }
 }
