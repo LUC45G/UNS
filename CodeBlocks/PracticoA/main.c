@@ -5,7 +5,7 @@ int convertirADecimal(char c);
 int contarDigitos(int n);
 
 int main() {
-    punto11();
+    punto14();
     return 0;
 }
 
@@ -306,3 +306,27 @@ int esProlijoDesc(int n) {
         return ( (n%10) < ( (n/10)%10 ) ) && esProlijoDesc(n/10);
     }
 }
+
+int punto14() {
+    int input;
+
+    printf("Ingrese un numero entero: ");
+    scanf("%d", &input);
+    printf("\n");
+
+
+    printf("El cuadrado de %d es %d", input, cuadrado(input));
+}
+
+int cuadrado(int i) {
+
+    if ( i == 1 ) {
+        return 1;
+    }
+    else {
+        return cuadrado(i-1) + ( (2*i) - 1);
+    }
+
+}
+
+

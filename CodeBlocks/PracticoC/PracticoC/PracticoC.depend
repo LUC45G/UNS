@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1567181260 source:c:\users\cornflower\downloads\uns\codeblocks\practicoc\practicoc\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
