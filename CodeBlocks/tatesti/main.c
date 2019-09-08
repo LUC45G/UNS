@@ -34,16 +34,40 @@ int ColocarFicha(int x, int y, int jugador) {
 
 }
 
+int HayGanador() {
+    int ret = 0, i, j; char aux;
+
+    for ( i = 1; turno>2 && !ret && i < 8; i++) { // Recorre todas las posiciones excepto la primera y la ultima
+
+        for( j = 1; !ret && j < 5; j++) { // recorre de 1 a 4, los rangos en que se puede producir una victoria
+
+            if( j == 2 && i != 4 ) continue; // Casos especiales, tengo que revisar una manera mas clean de evitarlos
+
+            aux = fichas[i]; // guarda la ficha 'central'
+            if ( aux != ' ') ret = fichas[i-j] == aux && aux == fichas[i+j]; // si la ficha es valida, compara sus simetricos.
+                                                                            // Esto puede producir victoria en diagonal, horizontal o vertical
+        }
+    }
+
+    if ( ret ) { // si hay un ganador
+        ret = (fichas[i-1] == 'X') ? 1 : 2; // Devuelve el numero del jugador ganador
+        // printf("error con i: %i y con j: %i", i-1, j-1);
+    }
+
+    return ret;
+}
+
 
 
 int main() {
-    int x, y, control; // Variables de posicion y control
+    int x, y, control, winner = 0; // Variables de posicion y control
 
     InicializarFichas(); // Inicializa el arreglo de caracteres con ' '
     ImprimirTablero(); // Imprime el tablero inicialmente vacio
 
-    while ( turno < 9 ) {
+    while ( turno < 9 && !winner ) {
         // La variable de control 'turno' se incrementa en las llamadas a ColocarFicha
+        // La variable de control 'winner' almacena al jugador ganador. En caso de ser 0, es que todavia no gano nadie
 
         if(turno%2) { // Si turno % 2 == 1 significa que es turno del jugador 2
             do {
@@ -60,7 +84,17 @@ int main() {
                 control = ColocarFicha(x, y, 1);
             } while ( control ); // Pide coordenadas al jugador y cicla hasta que las coordenadas sean validas
         }
+
+        winner = HayGanador();
     }
+
+    if(winner) {
+        printf("\n\n\nEL GANADOR ES EL JUGADOR %i!!!", winner);
+    }
+    else {
+        printf("\n\n\nHAY EMPATE!!!");
+    }
+
 
 
     return 0;

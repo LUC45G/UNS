@@ -1,6 +1,5 @@
 # depslib dependency file v1.0
-1567890555 source:c:\users\cornflower\downloads\uns\codeblocks\tatesti\main.c
+1567967461 source:c:\users\cornflower\downloads\uns\codeblocks\tatesti\main.c
 	<stdio.h>
 	<stdlib.h>
-	<conio.h>
 
